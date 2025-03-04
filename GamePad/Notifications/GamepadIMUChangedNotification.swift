@@ -14,20 +14,20 @@ final class GamepadIMUChangedNotification {
 
 	static let Name = Notification.Name("GamePadIMUChangedNotification")
 
-	let gyroPitch:Int32
-	let gyroYaw:Int32
-	let gyroRoll:Int32
-	let accelX:Float32
-	let accelY:Float32
-	let accelZ:Float32
+	let gyroPitch:Double
+	let gyroYaw:Double
+	let gyroRoll:Double
+	let accelX:Double
+	let accelY:Double
+	let accelZ:Double
 
 	init(
-		gyroPitch:Int32,
-		gyroYaw:Int32,
-		gyroRoll:Int32,
-		accelX:Float32,
-		accelY:Float32,
-		accelZ:Float32
+		gyroPitch:Double,
+		gyroYaw:Double,
+		gyroRoll:Double,
+		accelX:Double,
+		accelY:Double,
+		accelZ:Double
 	) {
 
 		self.gyroPitch = gyroPitch

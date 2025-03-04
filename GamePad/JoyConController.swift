@@ -182,25 +182,25 @@ final class JoyConController {
 
 	/// pitch is when the nose of a plane goes up or down
 	/// think of a dolphin swimming
-	var leftGyroPitch:Int32 = 0
-	var previousLeftGyroPitch:Int32 = 0
+	var leftGyroPitch:Double = 0
+	var previousLeftGyroPitch:Double = 0
 
 	/// yaw is when the nose of a plane goes left or right
 	/// think of a shark swimming
-	var leftGyroYaw:Int32 = 0
-	var previousLeftGyroYaw:Int32 = 0
+	var leftGyroYaw:Double = 0
+	var previousLeftGyroYaw:Double = 0
 
 	/// roll is when the tips of the wings of a plane go up or down
 	/// think of a penguin walking
-	var leftGyroRoll:Int32 = 0
-	var previousLeftGyroRoll:Int32 = 0
+	var leftGyroRoll:Double = 0
+	var previousLeftGyroRoll:Double = 0
 
-	var leftAccelX:Float32 = 0
-	var previousLeftAccelX:Float32 = 0
-	var leftAccelY:Float32 = 0
-	var previousLeftAccelY:Float32 = 0
-	var leftAccelZ:Float32 = 0
-	var previousLeftAccelZ:Float32 = 0
+	var leftAccelX:Double = 0
+	var previousLeftAccelX:Double = 0
+	var leftAccelY:Double = 0
+	var previousLeftAccelY:Double = 0
+	var leftAccelZ:Double = 0
+	var previousLeftAccelZ:Double = 0
 
 	// battery
 	//var cableConnected = false
@@ -701,9 +701,9 @@ final class JoyConController {
 				var rawLeftAccelZ = Int32(report[18 + bluetoothOffset]) << 8 | Int32(report[17 + bluetoothOffset]) // TODO calibrate
 
 				// ?? gyroscope data is in rad/s
-				self.leftGyroPitch = Int32(report[20 + bluetoothOffset]) << 8 | Int32(report[19 + bluetoothOffset]) // TODO calibrate
-				self.leftGyroYaw   = Int32(report[22 + bluetoothOffset]) << 8 | Int32(report[21 + bluetoothOffset]) // TODO calibrate
-				self.leftGyroRoll  = Int32(report[24 + bluetoothOffset]) << 8 | Int32(report[23 + bluetoothOffset]) // TODO calibrate
+                // self.leftGyroPitch = Int32(report[20 + bluetoothOffset]) << 8 | Int32(report[19 + bluetoothOffset]) // TODO calibrate
+                // self.leftGyroYaw   = Int32(report[22 + bluetoothOffset]) << 8 | Int32(report[21 + bluetoothOffset]) // TODO calibrate
+                // self.leftGyroRoll  = Int32(report[24 + bluetoothOffset]) << 8 | Int32(report[23 + bluetoothOffset]) // TODO calibrate
 
 				/*
 				jc->accel.x = (float)(uint16_to_int16(packet[13] | (packet[14] << 8) & 0xFF00)) * jc->acc_cal_coeff[0];

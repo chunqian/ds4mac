@@ -174,26 +174,26 @@ final class DualShock4Controller {
 
 	/// pitch is when the nose of a plane goes up or down
 	/// think of a dolphin swimming
-	var gyroPitch:Int32 = 0
-	var previousGyroPitch:Int32 = 0
+	var gyroPitch:Double = 0
+	var previousGyroPitch:Double = 0
 
 	/// yaw is when the nose of a plane goes left or right
 	/// think of a shark swimming
-	var gyroYaw:Int32 = 0
-	var previousGyroYaw:Int32 = 0
+	var gyroYaw:Double = 0
+	var previousGyroYaw:Double = 0
 
 	/// roll is when the tips of the wings of a plane go up or down
 	/// think of a penguin walking
-	var gyroRoll:Int32 = 0
-	var previousGyroRoll:Int32 = 0
+	var gyroRoll:Double = 0
+	var previousGyroRoll:Double = 0
 
 	// TODO change to Int16
-	var accelX:Float32 = 0
-	var previousAccelX:Float32 = 0
-	var accelY:Float32 = 0
-	var previousAccelY:Float32 = 0
-	var accelZ:Float32 = 0
-	var previousAccelZ:Float32 = 0
+	var accelX:Double = 0
+	var previousAccelX:Double = 0
+	var accelY:Double = 0
+	var previousAccelY:Double = 0
+	var accelZ:Double = 0
+	var previousAccelZ:Double = 0
 
 	//var rotationZ:Float32 = 0
 
@@ -553,9 +553,9 @@ final class DualShock4Controller {
 		// or discard the sign bit of all bytes except the most significant one (untested)
 		// (  Int32(byteArray[0])  << 8 | Int32(byteArray[1])  ) & 0b1111_1111_0111_1111
 
-		self.gyroPitch = Int32(Int16(report[14 + bluetoothOffset]) << 8 | Int16(report[13 + bluetoothOffset]))
-		self.gyroYaw =   Int32(Int16(report[16 + bluetoothOffset]) << 8 | Int16(report[15 + bluetoothOffset]))
-		self.gyroRoll =  Int32(Int16(report[18 + bluetoothOffset]) << 8 | Int16(report[17 + bluetoothOffset]))
+        // self.gyroPitch = Int32(Int16(report[14 + bluetoothOffset]) << 8 | Int16(report[13 + bluetoothOffset]))
+        // self.gyroYaw =   Int32(Int16(report[16 + bluetoothOffset]) << 8 | Int16(report[15 + bluetoothOffset]))
+        // self.gyroRoll =  Int32(Int16(report[18 + bluetoothOffset]) << 8 | Int16(report[17 + bluetoothOffset]))
 
 
 		var rawAccelX = Int32(Int16(report[20 + bluetoothOffset]) << 8 | Int16(report[19 + bluetoothOffset])) // changes when we roll or yaw (tips of wing go up or down, nose of plane goes left or right)
@@ -1184,9 +1184,9 @@ final class DualShock4Controller {
 	}
 
 	func applyCalibration(
-		pitch:inout Int32, yaw:inout Int32, roll:inout Int32,
+		pitch:inout Double, yaw:inout Double, roll:inout Double,
 		rawAccelX:inout Int32, rawAccelY:inout Int32, rawAccelZ:inout Int32,
-		accelX:inout Float32, accelY:inout Float32, accelZ:inout Float32
+		accelX:inout Double, accelY:inout Double, accelZ:inout Double
 	) {
 
 		/*pitch = DualShock4Controller.applyGyroCalibration(
@@ -1437,7 +1437,7 @@ final class DualShock4Controller {
 	/// - Parameter sensorRawNegative1GValue: Raw bytes reading of the sensor at -1G (upside down gravity) according to factory calibration parameters obtained from the calibration feature report.
 	/// - Parameter gravityResolution: How many bytes is 1G
 	/// - Returns: Calibrated Gs reading of the sensor
-	static func applyAccelCalibration(_ sensorRawValue:Int32, sensorRawPositive1GValue:Int32, sensorRawNegative1GValue:Int32) -> Float32 {
+	static func applyAccelCalibration(_ sensorRawValue:Int32, sensorRawPositive1GValue:Int32, sensorRawNegative1GValue:Int32) -> Double {
 
 		/*
 
@@ -1483,7 +1483,7 @@ final class DualShock4Controller {
 		var calibratedValue:Int32 = 0 // TODO I don't need this to be an integer
 		calibratedValue = (2 * (sensorRawValue - sensorRawNegative1GValue) / (sensorRawPositive1GValue - sensorRawNegative1GValue)) - 1 // using the non precomputed gain constant version (at least for now)
 
-		return Float32(calibratedValue)
+		return Double(calibratedValue)
 
 		/*
 		sensorBias (accelXPlus - ((accelXPlus - accelXMinus) / 2))

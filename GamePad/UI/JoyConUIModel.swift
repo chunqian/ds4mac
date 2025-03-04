@@ -35,13 +35,13 @@ class JoyConUIModel: ObservableObject {
 	var leftSideBottomButton = false
 	var rightSideBottomButton = false
 
-	var leftGyroPitch:Int32 = 0
-	var leftGyroYaw:Int32 = 0
-	var leftGyroRoll:Int32 = 0
+	var leftGyroPitch:Double = 0
+	var leftGyroYaw:Double = 0
+	var leftGyroRoll:Double = 0
 
-	var leftAccelX:Float32 = 0
-	var leftAccelY:Float32 = 0
-	var leftAccelZ:Float32 = 0
+	var leftAccelX:Double = 0
+	var leftAccelY:Double = 0
+	var leftAccelZ:Double = 0
 
 
 

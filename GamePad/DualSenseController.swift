@@ -8,12 +8,25 @@
 
 import Foundation
 
+func formatAccel(_ value: Int32) -> Double {
+    let ACCEL_RES_PER_G: Double = 8192
+    let STANDARD_GRAVITY: Double = 9.80665
 
+    let accel = (Double(value) / ACCEL_RES_PER_G) * STANDARD_GRAVITY
+
+    return accel
+}
+
+func formatGyro(_ value: Int32) -> Double {
+    let gyro = Double(value) / 10
+
+    return gyro
+}
 
 final class DualSenseController {
 
-	static let VENDOR_ID_SONY:Int64 = 0x054C // 1356
-	static let CONTROLLER_ID_DUALSENSE:Int64 = 0x0Df2 // 3570 usb and bluetooth have the same id
+	static let VENDOR_ID_SONY:Int64 = 0x054C
+	static let CONTROLLER_ID_DUALSENSE:Int64 = 0x0CE6 // usb and bluetooth have the same id
 
 	static var nextId:UInt8 = 0
 
@@ -191,26 +204,26 @@ final class DualSenseController {
 
 	/// pitch is when the nose of a plane goes up or down
 	/// think of a dolphin swimming
-	var gyroPitch:Int32 = 0
-	var previousGyroPitch:Int32 = 0
+    var gyroPitch:Double = 0
+	var previousGyroPitch:Double = 0
 
 	/// yaw is when the nose of a plane goes left or right
 	/// think of a shark swimming
-	var gyroYaw:Int32 = 0
-	var previousGyroYaw:Int32 = 0
+	var gyroYaw:Double = 0
+	var previousGyroYaw:Double = 0
 
 	/// roll is when the tips of the wings of a plane go up or down
 	/// think of a penguin walking
-	var gyroRoll:Int32 = 0
-	var previousGyroRoll:Int32 = 0
+	var gyroRoll:Double = 0
+	var previousGyroRoll:Double = 0
 
 	// TODO change to Int16
-	var accelX:Float32 = 0
-	var previousAccelX:Float32 = 0
-	var accelY:Float32 = 0
-	var previousAccelY:Float32 = 0
-	var accelZ:Float32 = 0
-	var previousAccelZ:Float32 = 0
+	var accelX:Double = 0
+	var previousAccelX:Double = 0
+	var accelY:Double = 0
+	var previousAccelY:Double = 0
+	var accelZ:Double = 0
+	var previousAccelZ:Double = 0
 
 	//var rotationZ:Float32 = 0
 
@@ -591,16 +604,32 @@ final class DualSenseController {
 		// or discard the sign bit of all bytes except the most significant one (untested)
 		// (  Int32(byteArray[0])  << 8 | Int32(byteArray[1])  ) & 0b1111_1111_0111_1111
 
-		self.gyroPitch = Int32(Int16(report[14 + bluetoothOffset]) << 8 | Int16(report[13 + bluetoothOffset]))
-		self.gyroYaw =   Int32(Int16(report[16 + bluetoothOffset]) << 8 | Int16(report[15 + bluetoothOffset]))
-		self.gyroRoll =  Int32(Int16(report[18 + bluetoothOffset]) << 8 | Int16(report[17 + bluetoothOffset]))
+        // self.gyroPitch = Int32(Int16(report[14 + bluetoothOffset]) << 8 | Int16(report[13 + bluetoothOffset]))
+        // self.gyroYaw =   Int32(Int16(report[16 + bluetoothOffset]) << 8 | Int16(report[15 + bluetoothOffset]))
+        // self.gyroRoll =  Int32(Int16(report[18 + bluetoothOffset]) << 8 | Int16(report[17 + bluetoothOffset]))
 
 
-		var rawAccelX = Int32(Int16(report[20 + bluetoothOffset]) << 8 | Int16(report[19 + bluetoothOffset])) // changes when we roll or yaw (tips of wing go up or down, nose of plane goes left or right)
-		var rawAccelY = Int32(Int16(report[22 + bluetoothOffset]) << 8 | Int16(report[21 + bluetoothOffset])) // changes when we pitch or roll (nose of plane goes up or down, tips of wing go up or down)
-		var rawAccelZ = Int32(Int16(report[24 + bluetoothOffset]) << 8 | Int16(report[23 + bluetoothOffset])) // changes when we pitch or yaw (nose of plane goes up, down, left or right)
+        // var rawAccelX = Int32(Int16(report[20 + bluetoothOffset]) << 8 | Int16(report[19 + bluetoothOffset])) // changes when we roll or yaw (tips of wing go up or down, nose of plane goes left or right)
+        // var rawAccelY = Int32(Int16(report[22 + bluetoothOffset]) << 8 | Int16(report[21 + bluetoothOffset])) // changes when we pitch or roll (nose of plane goes up or down, tips of wing go up or down)
+        // var rawAccelZ = Int32(Int16(report[24 + bluetoothOffset]) << 8 | Int16(report[23 + bluetoothOffset])) // changes when we pitch or yaw (nose of plane goes up, down, left or right)
+        
+        let gyroPitch = Int32(Int16(report[16 + bluetoothOffset]) << 8 | Int16(report[15 + bluetoothOffset]))
+        let gyroYaw =   Int32(Int16(report[18 + bluetoothOffset]) << 8 | Int16(report[17 + bluetoothOffset]))
+        let gyroRoll =  Int32(Int16(report[20 + bluetoothOffset]) << 8 | Int16(report[19 + bluetoothOffset]))
+        
+        let accelX = Int32(Int16(report[22 + bluetoothOffset]) << 8 | Int16(report[21 + bluetoothOffset]))
+        let accelY = Int32(Int16(report[24 + bluetoothOffset]) << 8 | Int16(report[23 + bluetoothOffset]))
+        let accelZ = Int32(Int16(report[26 + bluetoothOffset]) << 8 | Int16(report[25 + bluetoothOffset]))
 
 
+        self.gyroPitch = formatGyro(gyroPitch)
+        self.gyroYaw = formatGyro(gyroYaw)
+        self.gyroRoll = formatGyro(gyroRoll)
+        
+        self.accelX = formatAccel(accelX)
+        self.accelY = formatAccel(accelY)
+        self.accelZ = formatAccel(accelZ)
+        
 		/*
 
 		Calculation of accelerometer mapping (as factor of gravity, 1g):
@@ -1231,7 +1260,7 @@ final class DualSenseController {
 	func applyCalibration(
 		pitch:inout Int32, yaw:inout Int32, roll:inout Int32,
 		rawAccelX:inout Int32, rawAccelY:inout Int32, rawAccelZ:inout Int32,
-		accelX:inout Float32, accelY:inout Float32, accelZ:inout Float32
+		accelX:inout Double, accelY:inout Double, accelZ:inout Double
 	) {
 
 		/*pitch = DualShock4Controller.applyGyroCalibration(

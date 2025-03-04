@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2292354E2D76A57F00503BDD /* DualSenseEdgeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2292354D2D76A57800503BDD /* DualSenseEdgeController.swift */; };
 		A91AF8B22A05A845000C89C9 /* XboxEliteSeries2UIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91AF8B12A05A845000C89C9 /* XboxEliteSeries2UIModel.swift */; };
 		A91AF8B42A05A948000C89C9 /* DualSenseUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91AF8B32A05A948000C89C9 /* DualSenseUIModel.swift */; };
 		A91AF8B62A05AB8E000C89C9 /* NintendoProUIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91AF8B52A05AB8E000C89C9 /* NintendoProUIModel.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2292354D2D76A57800503BDD /* DualSenseEdgeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualSenseEdgeController.swift; sourceTree = "<group>"; };
 		A91AF8B12A05A845000C89C9 /* XboxEliteSeries2UIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XboxEliteSeries2UIModel.swift; sourceTree = "<group>"; };
 		A91AF8B32A05A948000C89C9 /* DualSenseUIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DualSenseUIModel.swift; sourceTree = "<group>"; };
 		A91AF8B52A05AB8E000C89C9 /* NintendoProUIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NintendoProUIModel.swift; sourceTree = "<group>"; };
@@ -168,10 +170,11 @@
 		A992495D2673A6CB00573097 /* GamePad */ = {
 			isa = PBXGroup;
 			children = (
-				A99249C82673C3C400573097 /* Notifications */,
-				A992498A2673AA9300573097 /* UI */,
+				A99249682673A6CC00573097 /* GamePad.entitlements */,
+				A99249672673A6CC00573097 /* Info.plist */,
 				A992499E2673AB0E00573097 /* CRC32.swift */,
 				A91AF8B82A05BB45000C89C9 /* DualSenseController.swift */,
+				2292354D2D76A57800503BDD /* DualSenseEdgeController.swift */,
 				A99249A82673AB0E00573097 /* DualShock4Controller.swift */,
 				A99249962673AB0E00573097 /* DualShock4Direction.swift */,
 				A99249992673AB0E00573097 /* GamepadHIDMonitor.swift */,
@@ -183,9 +186,9 @@
 				A99249A52673AB0E00573097 /* XboxOneController.swift */,
 				A99249A62673AB0E00573097 /* XboxOneDirection.swift */,
 				A99249622673A6CC00573097 /* Assets.xcassets */,
-				A99249672673A6CC00573097 /* Info.plist */,
-				A99249682673A6CC00573097 /* GamePad.entitlements */,
+				A99249C82673C3C400573097 /* Notifications */,
 				A99249642673A6CC00573097 /* Preview Content */,
+				A992498A2673AA9300573097 /* UI */,
 			);
 			path = GamePad;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				A99249AC2673AB0E00573097 /* DualShock4Direction.swift in Sources */,
 				A99249B92673AB0E00573097 /* GamepadBatteryChangedNotification.swift in Sources */,
 				A99249B22673AB0E00573097 /* DualShock4ChangeLedNotification.swift in Sources */,
+				2292354E2D76A57F00503BDD /* DualSenseEdgeController.swift in Sources */,
 				A91AF8B22A05A845000C89C9 /* XboxEliteSeries2UIModel.swift in Sources */,
 				A99249B82673AB0E00573097 /* XboxOneChangeRumbleNotification.swift in Sources */,
 				A99249BC2673AB0E00573097 /* XboxOneDirection.swift in Sources */,
@@ -584,7 +588,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"GamePad/Preview Content\"";
-				DEVELOPMENT_TEAM = CTFP6EH8GL;
+				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GamePad/Info.plist;
@@ -611,7 +615,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"GamePad/Preview Content\"";
-				DEVELOPMENT_TEAM = CTFP6EH8GL;
+				DEVELOPMENT_TEAM = V5Q9RCDP94;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = GamePad/Info.plist;

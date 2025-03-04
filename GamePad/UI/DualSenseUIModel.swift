@@ -62,13 +62,13 @@ class DualSenseUIModel: ObservableObject {
 	var touchpadTouch1X:Int16 = 0 // 12 bits only
 	var touchpadTouch1Y:Int16 = 0
 
-	var gyroPitch:Int32 = 0
-	var gyroYaw:Int32 = 0
-	var gyroRoll:Int32 = 0
+	var gyroPitch:Double = 0
+	var gyroYaw:Double = 0
+	var gyroRoll:Double = 0
 
-	var accelX:Float32 = 0
-	var accelY:Float32 = 0
-	var accelZ:Float32 = 0
+	var accelX:Double = 0
+	var accelY:Double = 0
+	var accelZ:Double = 0
 
 	var red:Double = 0
 	var green:Double = 0

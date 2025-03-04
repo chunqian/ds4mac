@@ -139,7 +139,7 @@ final class GamepadHIDMonitor {
 		let locationID = IOHIDDeviceGetProperty(device, kIOHIDLocationIDKey as CFString)
 		let productName = IOHIDDeviceGetProperty(device, kIOHIDProductKey as CFString)
 		let productID:Int64 = IOHIDDeviceGetProperty(device, kIOHIDProductIDKey as CFString) as! Int64
-		let vendorName = IOHIDDeviceGetProperty(device, kIOHIDManufacturerKey as CFString)
+        // let vendorName = IOHIDDeviceGetProperty(device, kIOHIDManufacturerKey as CFString)
 		let vendorID:Int64 = IOHIDDeviceGetProperty(device, kIOHIDVendorIDKey as CFString) as! Int64
 		let transport = IOHIDDeviceGetProperty(device, kIOHIDTransportKey as CFString)
 
@@ -149,7 +149,7 @@ final class GamepadHIDMonitor {
 
 		print("locationID: \(locationID!)") // TODO could be used as ID
 		print("productName: \(productName!)")
-		print("vendorName: \(vendorName!)")
+        // print("vendorName: \(vendorName!)")
 		print("transport: \(transport!)")
 
 		if vendorID == JoyConController.VENDOR_ID_NINTENDO
